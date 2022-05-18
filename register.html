@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8"/> <!-- gibt an welcher Zeichensatz benutzt wird-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/><!-- stellt sicher das die anzeige auf das endgerät passt -->
+		<meta name="author" content="Yannick Bayard"/>
+		<meta name="robots" content="noindex,nofollow"/><!-- Verhindert Öffentlichen Suchmaschinen das Indizieren der Seite-->
+		<link rel="stylesheet" href="style.css">
+		<link rel="icon" href="icon.png">
+		<title>CTC ST DK Online Register</title>
+	</head>
+	<body>
+		<header>
+			<img src="CTC_Advanced_Logo_Web.png" alt="Loge">
+		</header>
+		<nav>
+			<div>
+				<a href="anleitung.html"class="left" id="header">Anleitung</a>
+			</div>
+			<div>
+				<a href="impressum.html"class="right" id="header">Kontakt</a>
+			</div>
+		</nav>
+		<h1 class="center">CTC SCT DK Online Host</h1>
+		<a href="login.html"style= "text-align:left; font-size:18px display:inline";>Zurück zum Login</a>
+		<main>
+			<div>
+				<h2>Regestrierung nicht verfügbar</h2>
+				<br>
+				<br>
+				<form action="register.php" method="post">
+					<div>
+						<input id="uname" name="uname" type="text" required class="question">
+						<label for="uname"><span>Benutzername</span></label>
+						<br>
+					</div>
+					<div>
+						<input id="psswd" name="passwd" type="password" required class="question">
+						<label for="psswd"><span>Passwort</Span></label>
+						<br>
+					</div>
+					<div>
+						<input id="email" name="email" type="email" required class="question" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+						<label for="email"><span>E-Mail</Span></label>
+						<br>
+					</div>
+					<div>
+						<input id="compName" name="compName" type="text" required class="question">
+						<label for="compName"><span>Firmenname</Span></label>
+						<br>
+					</div>
+					<br>					
+					<button type="submit"> Registrieren</button>
+				</form>
+			</div>
+		</main>
+		<footer>
+		</footer>
+	</body>
+</html>

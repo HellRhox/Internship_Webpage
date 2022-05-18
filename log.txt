@@ -1,0 +1,6 @@
+Request 18.06.2018_13:41 This_is_a_test_Request
+Response 18.06.2018_13:59 This_is_a_test_Respnse
+Response 18.06.2018_15:10 This_is_no_real_response
+Time-Out 18.06.2018_15:12 No_Answer_from_the_Server
+Request 20.06.2018_09:42 Sort
+Response 20.06.2018_11:53 Test_Response

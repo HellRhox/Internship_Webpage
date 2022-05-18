@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de" id="site">
+	<head onload="the_function()">
+		<meta charset="utf-8"/> <!-- gibt an welcher Zeichensatz benutzt wird-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/><!-- stellt sicher das die anzeige auf das endgerät passt -->
+		<meta name="author" content="Yannick Bayard"/>
+		<meta name="robots" content="noindex,nofollow"/><!-- Verhindert Öffentlichen Suchmaschinen das Indizieren der Seite-->
+		<link rel="stylesheet" href="style.css">
+		<link rel="icon" href="icon.png">
+		<title>CTC ST DK Online Host</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="ltrim.js"></script>
+		<script src="sort_table.js"></script>
+	</head>
+	<body onload="readFile">
+			<script>
+			// enables the tablesort funktion
+				window.onload = function()
+				{
+					SortTable.init();
+					readFile();
+				}
+				</script>
+		<script>
+			//global var
+			var arraysize=0;
+			var oldLines=0;
+			var showLines=0;
+			var log;
+			
+			function readFile()
+			{
+				var outLog="";
+				$.ajax({url:'load-con.php',
+						data:{action:'read'},
+						type: 'post',
+						success: function(output)
+								{
+									var result=JSON.parse(output);
+									arraysize=result[0]["Array-Size"];
+									log=output;
+									if(arraysize>oldLines)
+									{
+										for(var i=showLines;i<arraysize;i++)
+										{
+											outLog+="<tr><td></td><td>"+result[i]["type"]+"</td><td>"+result[i]['date']+"</td><td>"+result[i].message[0]+"</td></tr>";
+										}
+								
+										document.getElementById("element").innerHTML=outLog;
+														$.ajax({url:'download.php',
+																data:{data: log},
+																type: 'post',
+																success: function(output)
+																{
+																	var result=JSON.parse(output);
+																	document.getElementById("download").href=result.path;
+																}	
+															});
+									oldLines=arraysize;
+									}
+								}
+						});
+			}
+			function formatMessage(msg)
+			{
+				var posQuater,posHalf,posEighth;
+				var insert="<br>";
+				var result;
+				if(msg.length>100)
+				{
+					posHalf=msg.length/2;
+					if(posHalf>100)
+					{
+							posQuater=msg.lengt/4;
+							if(posQuater>100)
+							{
+								posEighth=msg.lengt/8;
+							}
+							else
+							{
+								result=[msg.slice(0, posQuater), insert, msg.slice(posQuater,(2*posQuater)),insert,msg.slice((2*posQuater),(3*posQuater)),insert,msg.slice((3*posQuater,(4*posQuater)))].join('');
+							}
+					}
+					else
+					{
+						result=[msg.slice(0, posHalf), insert, msg.slice(posHalf)].join('');
+					}
+					
+						
+				}
+				else
+				 result=msg;
+				
+				return result;
+			}
+			
+			setInterval(readFile, 15000); // set´s an interval in witch the readFile funktion is caled
+			
+			function ping() //getting connection information
+			{
+				var port=null; //setting the port to null
+			
+				if(document.getElementById('port').value.length>=2) //getting the value of the input whene it is bigger than 2
+				{
+					port=document.getElementById('port').value; //setting the var to the value
+				}
+				if(port=="do a barrel roll") //Easter-egg
+				{
+					$(document.getElementById("status")).removeClass("rotate");
+					$(document.getElementById("site")).addClass("rotate");
+					
+				}
+					$.ajax({url:'load-con.php', //sending the request to the server
+							data:{action:'ping',port: port},
+							type:'post',
+							success:function(out)
+								{
+									if(out==true)
+									{
+										document.getElementById("status").innerHTML="Connected";
+										$(document.getElementById("status")).removeClass("offline");
+										$(document.getElementById("status")).addClass("online");
+									
+									}
+									else
+									{
+										document.getElementById("status").innerHTML="Disconnected";
+										$(document.getElementById("status")).removeClass("online");
+										$(document.getElementById("status")).addClass("offline");
+									}
+								}
+							})
+			}
+			
+			function clearing() // clear the table 
+			{		
+				if(document.getElementById("element")!=null)
+				{
+				var myNode = document.getElementById("element");
+					while (myNode.firstChild) {
+												myNode.removeChild(myNode.firstChild);
+												};
+					document.getElementById("element").innerHTML="<td></td>"
+					showLines=oldLines;
+					log="";
+				}
+				else
+					alert("Es gibt nichts mehr zu Clearen");
+			}
+			
+		</script>
+		<header>
+			<img src="CTC_Advanced_Logo_Web.png" alt="Logo">
+		</header>
+		<nav>
+			<div>
+				<a href="anleitung.html" class="left" id="header">Anleitung</a>
+			</div>
+			<div>
+				<a href="impressum.html" class="right" id="header">Kontakt</a>
+			</div>
+		</nav>
+		<h1 class="center">CTC SCT DK Online Host</h1>
+		<br/>
+		<div style="display:block;">
+			<div style="float:left; margin-left:250px; display:inline;">
+				<input id="port" name="port" type="text" class="question" required onkeypress="ping()">
+				<label for="port">
+					<span>
+						Port
+					</span>
+				</label>
+				<br/>
+			</div>
+			<a id="download" href="log.txt" download style="font-size:40px; display:block; float:right; margin-right:15vw; margin-left:10vw;">
+				LogFile
+			</a>
+		</div>
+		<main style="margin-top: 100px;margin-left: 250px;margin-right: 200px;">
+				<table class="sortable">
+					<thead>
+						<tr>
+							<th class="no_sort"></th>
+							<th> Type</th>
+							<th> Time</th>
+							<th class="no_sort"> Message</th>
+						</tr>
+					</thead>
+					<tbody id='element'>
+					</tbody>
+					<tfoot onload="ping()">
+						<tr>
+							<td colspan="5" style="border-top:2px solid black; border-right:none; font-size:12px">
+							XMT 
+								<h3 class="offline" style="display:inline" id="status">
+									Disconnected
+								</h3>
+								<div>
+									<a onclick="clearing()" style="text-decoration:underline; cursor:pointer">Clear</a>
+								</div>
+								<div style="margin-left:40vw">
+									Index:<p id="index" style="display:inline">0</p>
+								</div>
+								<div style="margin-left:10px; margin-right:5vw;">
+									Proc:<p id="proz" style="display:inline">.....</p>
+								</div>
+							<td>
+						</tr>
+					</tfoot>
+				</table>
+				<div style="margin-top:15vw">
+					<a href="">Brauchen Sie Hilfe?</a>
+				</div>
+					
+		</main>
+		
+	</body>
+</html>

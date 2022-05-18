@@ -1,0 +1,271 @@
+html
+{
+  font-family: 'Ubuntu', sans-serif;
+}
+body
+{
+	background: white;
+}
+img
+{
+	border:0px;
+}
+nav
+{
+	padding-top:0px;
+	color:white;
+	background:#0288d1;
+	display: block
+}
+div
+{
+	padding-top:0px;
+	display:inline;
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+.left 
+{
+	text-align:left;
+	padding-right:20px;
+	padding-left:5px;
+	background:#0d47a1;
+}
+.right 
+{
+		float:right;
+		text-align:right;
+		padding-right:10px;
+}
+
+.center
+{
+	padding:25px;
+	text-align:center;
+	background:#26c6da;
+}
+
+.middle
+{
+	text-align:center;
+	margin-bottom:0px;
+}
+
+h1
+{
+	margin-top:0px;
+}
+
+p
+{
+	margin-bottom:0px;
+	margin-top:0px;
+	font-weight:bold;
+}
+
+main
+{
+	display:flex;
+	align-content:center;
+	justify-content:center;
+}
+
+button
+{
+	background-color:#f50057;
+	color:white;
+	border-radius:5px;
+	padding:5%;
+	padding-left:20vw;
+	padding-right:20vw;
+	font-size:2vw;
+	letter-spacing:3px;
+}
+
+input
+{
+	border:2px solid grey;
+	margin:5px;
+/*	padding-right:100px;
+	padding-bottom:20px;*/
+}
+
+input:focus
+{
+	border-color: skyblue;
+}
+
+a:link
+{
+	text-decoration:none;
+}
+
+form
+{
+	margin-top:1vh;
+}
+#header
+{
+	color:white;
+}
+
+input,
+span,
+label,
+textarea 
+{
+  display: block;
+  margin: 5px;
+  padding: 5px;
+  border: none;
+  font-size: 20px;
+}
+
+input.question,
+textarea.question 
+{
+  font-size: 30px;
+  font-weight: 300;
+  border-radius: 2px;
+  margin: 0;
+  border: none;
+  width: 80%;
+  background: rgba(0, 0, 0, 0);
+  transition: padding-top 0.2s ease, margin-top 0.2s ease;
+  overflow-x: hidden; /* Hack to make "rows" attribute apply in Firefox. */
+}
+
+input.question + label,
+textarea.question + label 
+{
+  display: block;
+  position: relative;
+  white-space: nowrap;
+  padding: 0;
+  margin: 0;
+  width: 10%;
+  border-top: 1px solid red;
+  -webkit-transition: width 0.4s ease;
+  transition: width 0.4s ease;
+  height: 0px;
+}
+in
+put.question:focus + label,
+textarea.question:focus + label 
+{
+  width: 80%;
+}
+
+input.question:focus,
+input.question:valid 
+{
+  padding-top: 35px;
+}
+
+input.question:focus + label > span,
+input.question:valid + label > span 
+{
+  top: -100px;
+  font-size: 22px;
+  color: #333;
+}
+
+input.question:valid + label,
+textarea.question:valid + label 
+{
+  border-color: green;
+}
+
+input.question:invalid,
+textarea.question:invalid 
+{
+  box-shadow: none;
+}
+
+input.question + label > span,
+textarea.question + label > span 
+{
+  font-weight: 300;
+  margin: 0;
+  position: absolute;
+  color: #8F8F8F;
+  font-size: 48px;
+  top: -66px;
+  left: 0px;
+  z-index: -1;
+  -webkit-transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+  transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+}
+
+tbody>tr:nth-child(even)>td+td
+{
+	background-color:#ffe0b2;
+}
+
+tbody>tr:nth-child(odd)>td+td
+{
+	background-color:#ffccbc;
+}
+thead
+{
+text-align:left;
+border-bottom:2px solid black;
+}
+
+table
+{
+	width:100%;
+	height:50%;
+	border:2px solid grey;
+	border-collapse: collapse;
+}
+
+tr>td,
+tr>th
+{
+	border-right: 2px solid black;
+}
+
+tr>th+th,
+tr>td+td
+{
+	border-color:aliceblue;
+}
+
+tbody>tr
+{
+	border-bottom:2px solid aliceblue;
+}
+
+tfoot
+{
+	border:2px solid black;
+}
+
+.online 
+{
+ font-style:oblique;
+ color: green;
+}
+
+.offline
+{
+	font-style:normal;
+	color:red;
+}
+
+td
+{
+	table-layout:fixed;
+	max-width:120px;
+	overflow:hidden
+}
+.rotate {
+    -webkit-animation:spin 4s linear 2;
+    -moz-animation:spin 4s linear 2;
+    animation:spin 4s linear 2;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
